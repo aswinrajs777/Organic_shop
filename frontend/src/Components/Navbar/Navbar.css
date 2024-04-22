@@ -1,0 +1,143 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    box-shadow: 0 1px 3px -2px rgb(53, 47, 47);
+    height: 40px;
+    background-color: rgb(48, 140, 20);
+   
+}
+.nav-logo img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+.nav-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo p{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+}
+
+
+
+  
+  
+  .dropdown-content {
+  
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .no-underline {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+
+  .nav-menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .nav-menu li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .nav-menu hr{
+    border: none;
+    height: 1px;
+    width: 80%;
+    border-radius: 10px;
+    background-color: red;
+
+  }
+  .nav-cart-login{
+    display: flex;
+    align-items: center;
+    gap: 45px;
+  }
+
+  .nav-cart-login button{
+    width: 127px;
+    height: 38px;
+    outline: none;
+    border: 1px solid rgb(179, 178, 178);
+    border-radius: 15px;
+    color: grey;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: whitesmoke;
+    cursor: pointer;
+  }
+
+  .nav-cart-login button:active{
+    background-color: rgb(172, 170, 170);
+  }
+
+  .nav-cart-count{
+    height: 22px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -35px;
+    margin-left: -45px;
+    border-radius: 11px;
+    font-size: 14px;
+    background: red;
+    color: white;
+  }
+  @media(max-width:1280px){
+    .navbar{
+      padding: 12px 
+    }
+  }
+
+.profile-icon{
+  height: 30px;
+  width: 30px;
+}  
+.cart-icon{
+  color: #ffff;
+  height: 50rem;
+}
+.profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-name{
+  color: #fff;
+}
