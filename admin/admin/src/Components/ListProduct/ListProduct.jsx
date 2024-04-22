@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react'
 import './ListProduct.css'
 import cross_icon from '../../assets/cross_icon.png'
 const ListProduct = () => {
-
+  const baseUrl = "https://organic-shop-f3iu.onrender.com";
+  
   const [allproducts,setAllProducts]=useState([])
 
   const fetchinfo=async()=>{

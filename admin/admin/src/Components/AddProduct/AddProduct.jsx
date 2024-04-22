@@ -3,6 +3,7 @@ import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 
 const AddProduct = () => {
+  const baseUrl = "https://organic-shop-f3iu.onrender.com";
     const [image,setImage] =useState(false);
     const [productDetails,setProductDetails]=useState({
         name:"",
