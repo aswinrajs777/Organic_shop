@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './CSS/Loginsignup.css'
 const LoginSignup = () => {
-
+  const baseUrl = "https://organic-shop-f3iu.onrender.com";
   const [state,setState]=useState("Login");
   const [formData,setFormData]=useState({
     username:"",
@@ -14,7 +14,7 @@ const LoginSignup = () => {
   }
   const login =async()=>{
     let responseData;
-    await fetch("http://localhost:4000/login",{
+    await fetch(baseUrl+"/login",{
       method:'POST',
       headers:{
         Accept:'application/json',
@@ -35,7 +35,7 @@ const LoginSignup = () => {
 
   const signup=async()=>{
     let responseData;
-    await fetch("http://localhost:4000/signup",{
+    await fetch(baseUrl+"/signup",{
       method:'POST',
       headers:{
         Accept:'application/json',

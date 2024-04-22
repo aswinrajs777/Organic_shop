@@ -12,15 +12,15 @@ const getDefaultCart = ()=>{
 }
 
 const ShopContextProvider =(props)=>{
-
+    const baseUrl = "https://organic-shop-f3iu.onrender.com";
     const [all_product,setAll_Product]=useState([]);
     const [cartItems,SetCartItems]=useState(getDefaultCart());    
     useEffect(()=>{
-        fetch('http://localhost:4000/allproducts').then((Response)=>Response.json()).then((data)=>setAll_Product(data))
+        fetch(baseUrl+'/allproducts').then((Response)=>Response.json()).then((data)=>setAll_Product(data))
 
         if(localStorage.getItem('auth-token'))
         {
-            fetch("http://localhost:4000/getcart",{
+            fetch(baseUrl+"/getcart",{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -36,7 +36,7 @@ const ShopContextProvider =(props)=>{
         
         SetCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/addtocart',{
+            fetch(baseUrl+'/addtocart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -54,7 +54,7 @@ const ShopContextProvider =(props)=>{
     const removeFromCart =(itemId)=>{
         SetCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/removefromcart',{
+            fetch(baseUrl+'/removefromcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',

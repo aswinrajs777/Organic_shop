@@ -4,10 +4,10 @@ import data_product from '../Assests/data'
 import Item from '../Item/Item'
 export const Popular = () => {
 
-  
+  const baseUrl = "https://organic-shop-f3iu.onrender.com";
   const [data_product,setData_Product] = useState([]);
   useEffect(()=>{
-    fetch("http://localhost:4000/popularinsoap").then((response)=>response.json()).then((data)=>setData_Product(data));
+    fetch(baseUrl+"/popularinsoap").then((response)=>response.json()).then((data)=>setData_Product(data));
   },[])
 
   return (

@@ -4,8 +4,9 @@ import Item from '../Item/Item'
 const  NewCollections = () => {
 
   const [new_arrival,setNew_arrival] = useState([]);
+  const baseUrl = "https://organic-shop-f3iu.onrender.com";
   useEffect(()=>{
-    fetch("http://localhost:4000/newcollections").then((response)=>response.json()).then((data)=>setNew_arrival(data));
+    fetch(baseUrl+"/newcollections").then((response)=>response.json()).then((data)=>setNew_arrival(data));
   },[])
   return (
     <div className='newcollections'>
