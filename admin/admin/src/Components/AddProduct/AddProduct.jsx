@@ -1,6 +1,9 @@
 import React ,{useState} from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
+import { storage } from "../../firebase"; // Correct path to firebase.js
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 
 const AddProduct = () => {
   const baseUrl = "https://organic-shop-f3iu.onrender.com";
@@ -12,6 +15,48 @@ const AddProduct = () => {
         old_price:"",
         new_price:""
     })
+
+    const [image1, setImage1] = useState(null);
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
+    const successupload=0;
+
+    const handleChange = e => {
+        if (e.target.files[0]) {
+        setImage1(e.target.files[0]);
+        setImage(e.target.files[0]);
+        }
+    };
+
+
+    const handleUpload = () => {
+        const storageRef = ref(storage, `images/${image1.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, image1);
+    
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            // Progress function
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          error => {
+            // Error function
+            console.log(error);
+          },
+          () => {
+            // Complete function
+            getDownloadURL(uploadTask.snapshot.ref).then(url => {
+              setUrl(url);
+              setImage(url);
+              console.log(url);
+            });
+          }
+        );
+      };
+
 
     const imageHanderler =(e)=>{
         setImage(e.target.files[0]);
@@ -29,30 +74,30 @@ const AddProduct = () => {
         let formData=new FormData();
         formData.append('product',image);
 
-        await fetch(baseUrl+"/upload",{
-            method:'POST',
-            headers:{
-                Accept:'application/json',
-            },
-            body:formData,
-        }).then((resp)=> resp.json()).then((data)=>{responseData=data});
-
-        if(responseData.success)
+       
+        product.image=url;
+        if(product.category==="" || product.name==="" || product.new_price==="" || product.old_price==="")
         {
-            product.image=responseData.image_url;
-            console.log(product)
-            await fetch(baseUrl+'/addproduct',{
-                method:'POST',
-                headers:{
-                    Accept:'application/json',
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify(product),
-            }).then((resp)=>resp.json()).then((data)=>{
-                data.success?alert("Product ADDED"):alert("Failed")
-            })
+          alert("Fill All the fields");              
         }
-
+        else if(product.image === "" ){
+          alert("upload image");
+        }
+        else
+        {
+          console.log(product)
+          await fetch(baseUrl+'/addproduct',{
+              method:'POST',
+              headers:{
+                  Accept:'application/json',
+                  'Content-Type':'application/json'
+              },
+              body:JSON.stringify(product),
+          }).then((resp)=>resp.json()).then((data)=>{
+              data.success?alert("Product ADDED"):alert("Failed")
+              
+          })
+        }
     }
 
   return (
@@ -75,11 +120,18 @@ const AddProduct = () => {
             <p>Product Category</p>
             <input value={productDetails.category} onChange={changeHandeler} type="text" name='category' placeholder='type here'/>
         </div>
-        <div className='addproduct-itemfeild'>
+        <div className='addproduct1'>
+        <progress value={progress} max="100" />
+        <br />
             <label htmlFor="file-input">
-                <img src={image?URL.createObjectURL(image):upload_area} className='addproduct-thumbnail-img' alt="" />
+                <img src={url?url:upload_area} className='addproduct-thumbnail-img' alt="" />
             </label>
-            <input onChange={imageHanderler} type="file" name='image' id='file-input' hidden/>
+            {successupload?<p>upload</p>:<p>uploaded</p>}
+            <br />
+            <input  type="file" onChange={handleChange} />
+            <br />
+            <br />
+            <button className='imageupload-btn' onClick={handleUpload}>Upload image</button>
         </div>
         <button onClick={()=>{add_product()}} className='addproduct-btn'>ADD</button>
     </div>
