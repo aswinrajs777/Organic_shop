@@ -1,8 +1,9 @@
 import React ,{useState} from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
-import { storage } from "../../firebase"; // Correct path to firebase.js
+import { storage } from "../firebase"; // Correct path to firebase.js
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 
 
 const AddProduct = () => {
