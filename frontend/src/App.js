@@ -12,6 +12,9 @@ import Footer from './Components/Footer/Footer';
 import soap_banner from './Components/Assests/Soap_Banner.png'
 import shampoo_banner from './Components/Assests/shampoos_banner.jpg'
 import oil_banner from './Components/Assests/oil_banner.webp'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <div >
@@ -32,6 +35,16 @@ function App() {
           <Route path="/Login" element={<LoginSignup/>}></Route>
 
         </Routes>
+        <ToastContainer  position="bottom-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"/>
         <Footer />
         </BrowserRouter>
     </div>

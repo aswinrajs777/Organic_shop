@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import './CartItems.css'
 import { ShopContext } from '../../Context/ShopContext'
+import { toast } from 'react-toastify'
 import remove_icon from '../Assests/cart_cross_icon.png'
 function CartItems() {
     let cart_total=0;
@@ -35,7 +36,7 @@ function CartItems() {
                     <button className='cartitems-quantity'>{cartItems[e.id]}</button>
                     <p>RS{e.new_price*cartItems[e.id]}</p>
                     
-                    <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(e.id)}} alt="" />
+                    <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(e.id);toast.error(`${e.name} Removed from  cart`)}} alt="" />
                 </div>
                 <hr />
             </div>

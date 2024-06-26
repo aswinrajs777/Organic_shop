@@ -3,6 +3,7 @@ import './ProductDisplay.css'
 import star_icon from '../Assests/star_icon.png'
 import star_dull_icon from '../Assests/star_dull_icon.png'
 import { ShopContext } from '../../Context/ShopContext'
+import { toast } from 'react-toastify'
 
 function ProductDisplay(props) {
     const {product}=props;
@@ -37,7 +38,7 @@ function ProductDisplay(props) {
             <div className="productdisplay-right-description">
                 A good Product which is naturally made.
             </div>
-            <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+            <button onClick={()=>{addToCart(product.id); toast.success(`${product.name} added to cart successfully`,{position:'bottom-right',autoClose:2000})}}>ADD TO CART</button>
             <p className='productdisplay-right-category'><span>Category:</span>Soap,Lemon S</p>
             <p className='productdisplay-right-category'><span>Tags:</span>Latest,Natural</p>
         </div>

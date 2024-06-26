@@ -3,6 +3,7 @@ import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 import { storage } from "../firebase"; // Correct path to firebase.js
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { toast } from 'react-toastify'
 
 
 
@@ -53,6 +54,7 @@ const AddProduct = () => {
               setUrl(url);
               setImage(url);
               console.log(url);
+              toast.success("image uploaded")
             });
           }
         );
@@ -79,10 +81,28 @@ const AddProduct = () => {
         product.image=url;
         if(product.category==="" || product.name==="" || product.new_price==="" || product.old_price==="")
         {
-          alert("Fill All the fields");              
+          toast.error("Fill All the feilds",{
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+            });              
         }
         else if(product.image === "" ){
-          alert("upload image");
+          toast.error("upload image!",{
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+            }); 
         }
         else
         {
@@ -95,7 +115,7 @@ const AddProduct = () => {
               },
               body:JSON.stringify(product),
           }).then((resp)=>resp.json()).then((data)=>{
-              data.success?alert("Product ADDED"):alert("Failed")
+              data.success?toast.success("Producted Added successfully"):toast.error("Failed")
               
           })
         }
@@ -127,7 +147,7 @@ const AddProduct = () => {
             <label htmlFor="file-input">
                 <img src={url?url:upload_area} className='addproduct-thumbnail-img' alt="" />
             </label>
-            {successupload?<p>upload</p>:<p>uploaded</p>}
+            
             <br />
             <input  type="file" onChange={handleChange} />
             <br />

@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import './ListProduct.css'
+import { toast } from 'react-toastify'
+
 import cross_icon from '../../assets/cross_icon.png'
 const ListProduct = () => {
   const baseUrl = "https://organic-shop-f3iu.onrender.com";
@@ -23,6 +25,11 @@ const ListProduct = () => {
         'Content-Type':'application/json',
       },
       body:JSON.stringify({id:id})
+    }).then(response =>{
+      if(response.ok)
+        {
+          toast.error("Item Removed");
+        }
     })
     await fetchinfo();
   }
@@ -49,7 +56,7 @@ const ListProduct = () => {
               <p>Rs{product.old_price}</p>
               <p>Rs{product.new_price}</p>
               <p>{product.category}</p>
-              <img onClick={()=>{remove_product(product.id)}} className='listproduct-remove-icon' src={cross_icon} alt="" />
+              <img onClick={()=>{remove_product(product.id) }} className='listproduct-remove-icon' src={cross_icon} alt="" />
             </div>
             </>
           })}
