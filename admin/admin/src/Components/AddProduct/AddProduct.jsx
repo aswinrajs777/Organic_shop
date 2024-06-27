@@ -15,13 +15,13 @@ const AddProduct = () => {
         image:"",
         category:"",
         old_price:"",
-        new_price:""
+        new_price:"",
+        desc:""
     })
 
     const [image1, setImage1] = useState(null);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
-    const successupload=0;
 
     const handleChange = e => {
         if (e.target.files[0]) {
@@ -141,9 +141,13 @@ const AddProduct = () => {
             <p>Product Category</p>
             <input value={productDetails.category} onChange={changeHandeler} type="text" name='category' placeholder='type here'/>
         </div>
+        <div className="addproduct-itemfeild">
+            <p>Product Description</p>
+            <input value={productDetails.desc} onChange={changeHandeler} type="text" name='desc' placeholder='type here'/>
+        </div>
         <div className='addproduct1'>
         <progress value={progress} max="100" />
-        <br />
+        <br/>
             <label htmlFor="file-input">
                 <img src={url?url:upload_area} className='addproduct-thumbnail-img' alt="" />
             </label>
