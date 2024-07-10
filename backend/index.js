@@ -140,6 +140,7 @@ app.post('/removeproduct',async(req,res)=>{
 app.get('/allproducts',async(req,res)=>{
     const products=await Product.find({});
     console.log("Fetched all products");
+    console.log(products);
     res.send(products)
 })
 
@@ -241,7 +242,7 @@ app.get('/newcollections',async (req,res)=>{
 //api for popular in soap
 
 app.get('/popularinsoap',async(req,res)=>{
-    let products=await Product.find({category:"soap"});
+    let products=await Product.find({category:"Soap"});
     let popular_in_soap =products.slice(0,4);
     console.log("featched soaps");
     res.send(popular_in_soap);
