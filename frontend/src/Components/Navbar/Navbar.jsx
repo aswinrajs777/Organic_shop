@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { ShopContext } from '../../Context/ShopContext'
 import { AiOutlineUser } from "react-icons/ai";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { CiShoppingCart } from "react-icons/ci";
 
 export const Navbar = () => {
@@ -21,37 +23,57 @@ export const Navbar = () => {
     setDropdownOpen(!isDropdownOpen);
   };
   return (
-    <div className="navbar">
-      <div className="nav-logo">
-        <img src={logo} alt="" />
-        <p>Organic Shop</p>
+    <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
+      <div className="container-fluid">
+        <Link className="navbar-brand d-flex align-items-center" to="/">
+          <img src={logo} alt="Logo" style={{ height: '40px' }} />
+          <span>Organic Shop</span>
+        </Link>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className={`nav-link ${menu === 'shop' ? 'active' : ''}`} to="/" onClick={() => setMenu('shop')}>Shop</Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#dropdown" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={toggleDropdown}>
+                Products 
+              </a>
+              <ul className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
+                <li><Link className="dropdown-item" to="/oil" onClick={() => setMenu('product')}>Oil</Link></li>
+                <li><Link className="dropdown-item" to="/soap" onClick={() => setMenu('product')}>Soap</Link></li>
+                <li><Link className="dropdown-item" to="/shampoo" onClick={() => setMenu('product')}>Shampoo</Link></li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <Link className={`nav-link ${menu === 'about' ? 'active' : ''}`} to="/About" onClick={() => setMenu('about')}>About</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={`nav-link ${menu === 'allProducts' ? 'active' : ''}`} to="/allproduct" onClick={() => setMenu('allProducts')}>All Products</Link>
+            </li>
+          </ul>
+          <Link to="/Cart" className="position-relative me-2">
+              <CiShoppingCart  className='cart-icon' />
+              <span className="badge bg-secondary  top-0 start-100 translate-middle cart-count">{getTotalCartItems()}</span>
+          </Link>
+          <div className="d-flex align-items-center">
+            {localStorage.getItem('auth-token') ? (
+              <>
+                <button className="btn btn-outline-light me-2" onClick={()=>{localStorage.removeItem('auth-token','name');window.location.replace('/')}}>Logout</button>
+                <div className="d-flex align-items-center">
+                  <AiOutlineUser className="me-1" />
+                  <span className="me-3">{localStorage.getItem('name')}</span>
+                </div>
+              </>
+            ) : (
+              <Link to="/Login" className="btn btn-outline-light me-2">Login</Link>
+            )}
+            
+          </div>
+        </div>
       </div>
-        <ul className="nav-menu">
-          <li onClick={()=>{setMenu("shop")}}><Link className='no-underline' to='/'>Shop</Link> {menu==='shop'?<hr/>:<></>}</li>
-          <div className="dropdown" onClick={toggleDropdown}>
-          <li href="#dropdown" className="no-underline">
-            Products <img src={drop_icon} height='8px'></img> {menu==='product'?<hr/>:<></>}
-          </li>
-          {isDropdownOpen && (
-            <div className="dropdown-content">
-              <li href="#item1" onClick={()=>{setMenu("product")}}><Link to='/oil'>oil</Link></li>
-              <li href="#item2" onClick={()=>{setMenu("product")}}><Link to='/soap'>soap</Link></li>
-              <li href="#item3" onClick={()=>{setMenu("product")}}><Link to='/Shampoo'>shampoo</Link></li>
-            </div>
-          )}
-        </div>
-          <li onClick={()=>{setMenu("about")}}><Link className='no-underline' to='/About'>About</Link> {menu==='about'?<hr/>:<></>}</li>
-          <li onClick={()=>{setMenu("All products")}}><Link className='no-underline' to='/allproduct'>All Products</Link> {menu==='All products'?<hr/>:<></>}</li>
-        </ul>
-        
-        <div className="nav-cart-login">
-        {localStorage.getItem('auth-token')?<button onClick={()=>{localStorage.removeItem('auth-token','name');window.location.replace('/')}}>Logout</button>:<Link to='/Login'><button>Login</button></Link>}
-          {localStorage.getItem('auth-token')?<div className='profile'><AiOutlineUser className='profile-icon'  style={{color: '#ffffff',}} /><p className='profile-name'>{localStorage.getItem('name')}</p></div>:<div className='profile'><AiOutlineUser className='profile-icon'  style={{color: '#ffffff',}} /></div>}
-          <Link to='/Cart'>< CiShoppingCart className='cart-icon' /></Link>
-          <div className='nav-cart-count'>{getTotalCartItems()}</div>
-        </div>
-        
-      
-    </div>
+    </nav>
   )
 }

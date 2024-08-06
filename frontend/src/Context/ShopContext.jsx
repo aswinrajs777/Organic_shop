@@ -68,25 +68,7 @@ const ShopContextProvider =(props)=>{
         }
     }
 
-    const getTotalCartAmount = ()=>{
-        
-        let totalAmount=0;
-        //function not working
-        // for(let item in cartItems)
-        // {                   
-        //     if(cartItems[item]===0)
-        //     {
-            
-        //      let iteminfo = all_product.find((product)=>product.id===Number(item))  
-        //      console.log(iteminfo)
-        //      totalAmount=totalAmount+iteminfo.new_price*cartItems[item];
-        //      console.log(totalAmount)
-
-        //     }
-        //     return totalAmount;
-        // }
-        //#
-    }
+   
     
     const getTotalCartItems =() =>{
         let totalItem=0;
@@ -100,7 +82,7 @@ const ShopContextProvider =(props)=>{
         return totalItem;
     }
 
-    const contextValue={getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart}
+    const contextValue={getTotalCartItems,all_product,cartItems,addToCart,removeFromCart}
     return(
         <ShopContext.Provider value={contextValue}>
             {props.children}

@@ -1,4 +1,4 @@
-.shopcategory-banner{
+/* .shopcategory-banner{
     display: block;
     margin: 30px auto;
     width: 82%;
@@ -45,4 +45,48 @@
     color: #787878;
     font-size: 18px;
     font-weight: 500;
-}
+} */
+
+/* ShopCategory.css */
+
+/* Banner image */
+.shopcategory-banner {
+    width: 100%;
+    object-fit: cover;
+    height: auto;
+  }
+  
+  /* Product container */
+  .shopcategory-products {
+    margin-top: 15px;
+  }
+  
+  /* Individual product item */
+  .product-item {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* This creates a 1:1 aspect ratio for the container */
+  }
+  
+  .product-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+  }
+  
+  .shopcategory-indexSort {
+    margin-top: 15px;
+  }
+  
+  .shopcategory-sort img {
+    margin-left: 5px;
+  }
+  
+  .shopcategory-loadmore {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  

@@ -1,4 +1,4 @@
-.navbar{
+/* .navbar{
     display: flex;
     justify-content: space-around;
     padding: 16px;
@@ -140,4 +140,52 @@
 
 .profile-name{
   color: #fff;
+} */
+
+/* Navbar.css */
+
+.navbar-custom {
+  background-color: #28a745; /* Bootstrap's green color */
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .dropdown-toggle,
+.navbar-custom .btn {
+  color: #fff;
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .nav-link:hover,
+.navbar-custom .dropdown-toggle:hover {
+  color: #e2e6ea; /* Light grey color for hover effect */
+}
+
+.navbar-custom .dropdown-menu {
+  background-color: #28a745; /* Dropdown background color */
+}
+
+.navbar-custom .dropdown-item {
+  color: #fff;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: #218838; /* Darker green for hover effect */
+}
+.navbar-custom .navbar-brand img {
+  border-radius: 50%; /* Makes the image round */
+  height: 40px; /* Adjust as necessary */
+  width: 40px; /* Ensure the width matches the height to maintain a round shape */
+}
+.navbar-custom .navbar-brand span {
+  margin-left: 10px; /* Adjust the value to control the gap */
+}
+.cart-icon{
+  color: white;
+  font-size: 1.8rem; /* Increase the size of the icon */
+  stroke-width: 1px; 
+  margin-right: 5px;
+}
+.cart-count{
+  margin-right: 10px;
 }

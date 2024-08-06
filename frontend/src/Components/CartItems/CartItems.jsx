@@ -1,81 +1,88 @@
-import React, { useContext } from 'react'
-import './CartItems.css'
-import { ShopContext } from '../../Context/ShopContext'
-import { toast } from 'react-toastify'
-import remove_icon from '../Assests/cart_cross_icon.png'
-function CartItems() {
-    let cart_total=0;
-    let tot=0;
-    const {getTotalCartAmount,all_product,cartItems,removeFromCart} = useContext(ShopContext)
+  import React, { useContext } from 'react';
+  import './CartItems.css';
+  import { ShopContext } from '../../Context/ShopContext';
+  import { toast } from 'react-toastify';
+  import remove_icon from '../Assests/cart_cross_icon.png';
+  import { Link } from 'react-router-dom';
 
-  return (
-    <div className='cartitems'>
-        <div className="cartitems-format-main">
-            <p>Product</p>
-            <p>Title</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Total</p>
-            <p>Remove</p>
+  function CartItems() {
+    let tot = 0;
+    const { all_product, cartItems, removeFromCart } = useContext(ShopContext);
 
+    return (
+      <div className='container cartitems'>
+        <div className="row text-center mb-3">
+          <div className="col-2 col-sm-2"><p>Product</p></div>
+          <div className="col-4 col-sm-2"><p>Title</p></div>
+          <div className="col-2 col-sm-2"><p>Price</p></div>
+          <div className="col-2 col-sm-2"><p>Quantity</p></div>
+          <div className="col-2 col-sm-2"><p>Total</p></div>
+          <div className="col-1 col-sm-2"><p>Remove</p></div>
         </div>
-        
         <hr />
-        {
-        all_product.map((e)=>{
-            
-            if(cartItems[e.id]>0)
-            {
-                tot=tot+(e.new_price*cartItems[e.id]);
-                return <div>
-                <div className="cartitems-format cartitems-format-main">
-                    
-                    <img src={e.image} className='carticon-product-icon' alt="" />
-                    <p>{e.name}</p>
-                    <p>Rs{e.new_price}</p>
-                    <button className='cartitems-quantity'>{cartItems[e.id]}</button>
-                    <p>RS{e.new_price*cartItems[e.id]}</p>
-                    
-                    <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(e.id);toast.error(`${e.name} Removed from  cart`)}} alt="" />
+        {all_product.map((e) => {
+          if (cartItems[e.id] > 0) {
+            tot = tot + (e.new_price * cartItems[e.id]);
+            return (
+              <div key={e.id} className="row text-center align-items-center mb-3">
+                <div className="col-2 col-sm-2">
+                  <img src={e.image} className='img-fluid carticon-product-icon' alt={e.name} />
+                </div>
+                <div className="col-4 col-sm-2">{e.name}</div>
+                <div className="col-2 col-sm-2">Rs {e.new_price}</div>
+                <div className="col-2 col-sm-2">
+                  <button className='btn btn-outline-secondary cartitems-quantity'>{cartItems[e.id]}</button>
+                </div>
+                <div className="col-2 col-sm-2">Rs {e.new_price * cartItems[e.id]}</div>
+                <div className="col-1 col-sm-2">
+                  <img
+                    className='cartitems-remove-icon'
+                    src={remove_icon}
+                    onClick={() => { removeFromCart(e.id); toast.error(`${e.name} Removed from cart`); }}
+                    alt="Remove"
+                  />
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })}
+        <hr />
+        <div className="row cartitems-down">
+          <div className="col-md-6 mb-3">
+            <div className="card cartitems-total">
+              <div className="card-body">
+                <h5 className="card-title">Cart Totals</h5>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <span>Subtotal</span>
+                  <span>Rs {tot}</span>
                 </div>
                 <hr />
-            </div>
-            }
-            return null;
-        })}
-        <div className="cartitems-down">
-            <div className="cartitems-total">
-                <h1>Cart Totals</h1>
-                <div>
-                    <div className="cartitems-total-item">
-                        <p>Subtotal</p>
-                        <p>Rs{tot}</p>
-                    </div>
-                    <hr />
-                    <div className="cartitems-total-item">
-                        <p>Shipping Fee</p>
-                        <p>Free</p>
-                    </div>
-                    <hr />
-                    <div className="cartitems-total-item">
-                        <h3>Total</h3>
-                        <h3>Rs{tot}</h3>
-                    </div>
-                    
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <span>Shipping Fee</span>
+                  <span>Free</span>
                 </div>
-                <button>PROCEED TO CHECKOUT</button>
+                <hr />
+                <div className="d-flex justify-content-between align-items-center">
+                  <h4>Total</h4>
+                  <h4>Rs {tot}</h4>
+                </div>
+              </div>
             </div>
-            <div className="cartitems-promocode">
-            <p>If you have a promo code ,Enter it here.</p>
-            <div className="cartitems-promobox">
-                <input type="text" placeholder='Promo code' />
-                <button>Submit</button>
+            <Link to="/proceedtopay">
+              <button className='btn btn-primary w-100 mt-3'>PROCEED TO CHECKOUT</button>
+            </Link>
+          </div>
+          <div className="col-md-6 cartitems-promocode">
+            <p>If you have a promo code, enter it here.</p>
+            <div className="input-group">
+              <input type="text" className="form-control" placeholder='Promo code' />
+              <button className='btn btn-outline-secondary'>Submit</button>
             </div>
+          </div>
         </div>
-        </div>
-        
-    </div>
-  )
-}
+      </div>
+    );
+  }
 
-export default CartItems
+  export default CartItems;

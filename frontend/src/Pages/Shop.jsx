@@ -9,6 +9,8 @@ const Shop = () => {
     <div>
       <Hero/>
       <Popular/>
+      <br />
+      <br />
       <Offer/>
       <NewCollections />
       <NewsLetter />

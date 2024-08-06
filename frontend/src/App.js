@@ -12,7 +12,8 @@ import Footer from './Components/Footer/Footer';
 import soap_banner from './Components/Assests/Soap_Banner.png'
 import shampoo_banner from './Components/Assests/shampoos_banner.jpg'
 import oil_banner from './Components/Assests/oil_banner.webp'
-import { ToastContainer, toast } from 'react-toastify';
+import ProceedToPaymentPage from './Pages/Proceedtopay';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Shop/>}></Route>
           <Route path='/oil' element={<ShopCategory banner={oil_banner} category="oil"/>}></Route>
-          <Route path='/soap' element={<ShopCategory banner={soap_banner}  category="soap"/>}></Route>
+          <Route path='/soap' element={<ShopCategory banner={soap_banner}  category="Soap"/>}></Route>
           <Route path='/shampoo' element={<ShopCategory banner={shampoo_banner} category="shampoo"/>}></Route>
           <Route path='/allproduct' element={<ShopCategory banner={shampoo_banner} category="allproduct"/>}></Route>
           <Route path='/Product' element={<Product/>}>
@@ -33,18 +34,10 @@ function App() {
           <Route path='/About' element={<About/>}/>
           <Route path="/Cart" element={<Cart/>}></Route>
           <Route path="/Login" element={<LoginSignup/>}></Route>
-
+          <Route path="/proceedtopay" element={<ProceedToPaymentPage/>}></Route>
         </Routes>
-        <ToastContainer  position="bottom-right"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"/>
+        <ToastContainer></ToastContainer>
+
         <Footer />
         </BrowserRouter>
     </div>
