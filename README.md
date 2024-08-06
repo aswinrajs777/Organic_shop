@@ -7,5 +7,6 @@ Organic Shop is an online marketplace dedicated to offering a wide range of orga
 https://organicshop.vercel.app/
 
 ###Sample screenshots
+<br/>
 <img  width="570" height="490" src="https://github.com/user-attachments/assets/0c90da98-9b81-45ea-9172-179a7a05e610">
 
